@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="~{fragments/layout :: head('Manage Databases - CrudZaso')}">
+</head>
+<body>
+    <nav th:replace="~{fragments/layout :: navbar}"></nav>
+    <div th:replace="~{fragments/layout :: alert}"></div>
+    <div class="container">
+        <h3 class="mb-4">Manage Databases</h3>
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Owner</th>
+                                <th>Engine</th>
+                                <th>Port</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="db : ${databases}">
+                                <td th:text="${db.id}">1</td>
+                                <td th:text="${db.name}">DB Name</td>
+                                <td th:text="${db.users.name} + ' ' + ${db.users.lastName}">Owner</td>
+                                <td><span class="badge bg-light text-dark" th:text="${db.engine.name()}">MYSQL</span></td>
+                                <td th:text="${db.port}">3306</td>
+                                <td>
+                                    <span class="badge" th:classappend="
+                                        ${db.status.name() == 'RUNNING' ? 'bg-success' :
+                                        db.status.name() == 'STOPPED' ? 'bg-warning' :
+                                        db.status.name() == 'ARCHIVED' ? 'bg-secondary' : 'bg-info'}"
+                                        th:text="${db.status.name()}">Status</span>
+                                </td>
+                                <td>
+                                    <a th:href="@{'/databases/' + ${db.id}}" class="btn btn-sm btn-outline-primary">View</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

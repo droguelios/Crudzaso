@@ -14,5 +14,7 @@ public interface DataBaseRepository extends JpaRepository<Database, Long> {
 
     long countByUsers(Users users);
 
-    boolean existByPort(Integer port);
+    boolean existsByPort(Integer port);
+
+    List<Database> findByNameContainingIgnoreCaseOrUsers_NameContainingIgnoreCase(String name, String userName);
 }
