@@ -1,0 +1,13 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8081:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+    networks:
+      - eventify-net
+
+networks:
+  eventify-net:
+    external: true

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Register - CrudZaso')}">
+</head>
+<body class="bg-light">
+    <div class="container">
+        <div class="row min-vh-100 align-items-center justify-content-center">
+            <div class="col-md-5">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold">Create Account</h2>
+                    <p class="text-muted">Join CrudZaso DB Manager</p>
+                </div>
+                <div th:replace="~{fragments/layout :: alert}"></div>
+                <div class="card shadow-sm">
+                    <div class="card-body p-4">
+                        <form th:action="@{/auth/register}" th:object="${registerRequest}" method="post">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Name</label>
+                                    <input type="text" th:field="*{name}" class="form-control" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Last Name</label>
+                                    <input type="text" th:field="*{lastName}" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <input type="email" th:field="*{email}" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Password</label>
+                                <input type="password" th:field="*{password}" class="form-control" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Register</button>
+                        </form>
+                        <div class="text-center mt-3">
+                            <a href="/auth/login" class="text-decoration-none">Already have an account? Sign in</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

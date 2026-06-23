@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/layout :: head('Login - CrudZaso')}">
+</head>
+<body class="bg-light">
+    <div class="container">
+        <div class="row min-vh-100 align-items-center justify-content-center">
+            <div class="col-md-4">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold">CrudZaso DB</h2>
+                    <p class="text-muted">Sign in to your account</p>
+                </div>
+                <div th:if="${param.error}" class="alert alert-danger">Invalid email or password</div>
+                <div th:if="${param.registered}" class="alert alert-success">Account created successfully. Please sign in.</div>
+                <div th:if="${param.logout}" class="alert alert-info">You have been logged out.</div>
+                <div class="card shadow-sm">
+                    <div class="card-body p-4">
+                        <form th:action="@{/auth/login}" method="post">
+                            <div class="mb-3">
+                                <label class="form-label">Email</label>
+                                <input type="email" name="username" class="form-control" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Password</label>
+                                <input type="password" name="password" class="form-control" required>
+                            </div>
+                            <div class="mb-3 form-check">
+                                <input type="checkbox" name="remember-me" class="form-check-input" id="remember">
+                                <label class="form-check-label" for="remember">Remember me</label>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Sign in</button>
+                        </form>
+                        <div class="text-center mt-3">
+                            <a href="/auth/register" class="text-decoration-none">Create account</a>
+                            <span class="mx-2">|</span>
+                            <a href="/auth/forgot-password" class="text-decoration-none">Forgot password?</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
